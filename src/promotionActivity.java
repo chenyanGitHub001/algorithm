@@ -41,32 +41,24 @@ public class promotionActivity {
                 String ExchangeType = stringArray[5];
                 int count = currencyNum * rateMap.get(currencyType);
                 if (ExchangeType.equals("MAX")) {
-                    int gbpCount = count / rateMap.get("GBP");
-                    if (gbpCount > 0) {
-                        stringBuffer.append(gbpCount).append(" GBP ");
+                    int index=0;
+                    int remainder=0;
+                    for(String key:rateMap.keySet()){
+                        index = count/rateMap.get(key);
+                        if(index>0) {
+                            stringBuffer.append(index).append(" ").append(key).append(" ");
+                        }
+                        remainder = count%rateMap.get(key);
+                        count=remainder;
                     }
-                    int gbpRemainder = currencyNum % rateMap.get("GBP");
-                    //
-                    int usdCount = gbpRemainder / rateMap.get("USD");
-                    if (usdCount > 0) {
-                        stringBuffer.append(usdCount).append(" USD ");
-
-                    }
-                    int usdRemainder = gbpRemainder % rateMap.get("USD");
-                    int cnyCount = usdRemainder / rateMap.get("CNY");
-                    if (cnyCount > 0) {
-                        stringBuffer.append(cnyCount).append(" CNY ");
-
-                    }
-                    int cnyRemainder = usdRemainder % rateMap.get("CNY");
-                    if (cnyRemainder > 0) {
-                        stringBuffer.append(cnyRemainder).append(" HKD ");
-
-                    }
-                } else {
+                    System.out.println(stringBuffer);
+                } else if(ExchangeType.equals("MIN")){
                     stringBuffer.append(count).append(" HKD ");
+                    System.out.println(stringBuffer);
+                }else {
+                    System.out.println("ERROR");
                 }
-                System.out.println(stringBuffer);
+
             } else {
                 System.out.println("ERROR");
             }

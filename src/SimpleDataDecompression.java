@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SimpleDataDecompression {
     /*
@@ -16,19 +18,46 @@ public class SimpleDataDecompression {
 输入：a11b2bac3bad3abcd2
 输出：bbabcdabcdbacbacbacbadbadbadaaaaaaaaaaa
      */
-    public static void main(String [] args){
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        char[] stringArray = scanner.nextLine().toCharArray();
-        Set<String> set= new TreeSet<>();
-        int slow=0;
-        int fast=0;
-        while (fast<stringArray.length){
-            StringBuffer stringBuffer = new StringBuffer();
-            if(Character.isDigit(stringArray[fast])){
-                fast++;
+        char[] array = scanner.nextLine().toCharArray();
+        int [] index = new int[array.length];
+        String str = "";
+        String num = "";
+        boolean temp = false;
+        Map<String,Integer>  map =  new TreeMap<>();
+        for (int i = 0; i < array.length; i++) {
+            if (Character.isLetter(array[i])){
+                if(temp){
+                    map.put(str,Integer.parseInt(num));
+                    str="";
+                    num="";
+                    temp=false;
+                }
+                str+=array[i];
+
+            }
+            if (Character.isDigit(array[i])) {
+                  num +=array[i];
+                  temp=true;
             }
         }
+        map.put(str,Integer.parseInt(num));
+        List<Map.Entry<String,Integer>> list  =new ArrayList<>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
 
-        System.out.println(stringArray[1]);
-    }
-}
+        });
+        for(int i=0;i<list.size();i++){
+            StringBuffer stringBuffer = new StringBuffer();
+            for(int k=0;k<list.get(i).getValue();k++){
+                stringBuffer.append(list.get(i).getKey());
+            }
+            System.out.print(stringBuffer);
+
+                }
+            }
+        }

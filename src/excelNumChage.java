@@ -15,10 +15,10 @@ abc....z aaabac....az babbbc....yzzazbzc....zz aaa aab aac....
     public static void main(String [] args) {
         Scanner scanner = new Scanner(System.in);
         int number = scanner.nextInt();
-        String str = "";
+        StringBuilder str = new StringBuilder();
         StringBuilder stars= new StringBuilder();
         while (number>0){
-            str += String.valueOf((char)(number%26+'a'-1));
+            str.append(String.valueOf((char) (number % 26 + 'a' - 1)));
             number /=26;
         }
         for(int i=str.length()-1;i>=0;i--){

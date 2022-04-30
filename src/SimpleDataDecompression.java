@@ -18,6 +18,7 @@ public class SimpleDataDecompression {
 输入：a11b2bac3bad3abcd2
 输出：bbabcdabcdbacbacbacbadbadbadaaaaaaaaaaa
      */
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         char[] array = scanner.nextLine().toCharArray();
@@ -54,10 +55,10 @@ public class SimpleDataDecompression {
         for(int i=0;i<list.size();i++){
             StringBuffer stringBuffer = new StringBuffer();
             for(int k=0;k<list.get(i).getValue();k++){
+
                 stringBuffer.append(list.get(i).getKey());
             }
             System.out.print(stringBuffer);
-
                 }
             }
         }
